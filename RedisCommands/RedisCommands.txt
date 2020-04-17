@@ -1,0 +1,145 @@
+CONFIG Get databases
+SELECT 1
+INFO Keyspace
+FLUSHDB
+FLUSHALL
+
+Set name Tom
+set userprofileId 7777
+set browser FireFox
+set sessionId 452212
+Keys *
+
+get name 
+get userprofileId
+get browser
+get sessionId
+
+setex name 10 max
+ttl name
+get name
+
+Keys *
+==========================================
+mset num1 50 num2 60 num2 70 num3 80 num4 100
+
+Keys * 
+mset num3 60
+get num3 
+decr num3
+incr num1
+del sessionId
+Keys *
+
+===========================Hashes============
+hmset stu_1 Name Anuradha Age 28 studentId 2019009 Address Nawala
+hmset stu_3 Name Chanaka Age 30 studentId 2019008 Address Maharagama
+hmset stu_4 Name Jayani Age 24 studentId 2019007 Address Wallawatta
+hget stu_1 Name
+hgetall stu_1
+hset stu_3 Name tom
+hgetall stu_3
+hexists stu_1 surname
+hsetnx stu_1 surname teslar
+hgetall stu_1
+hdel stu_1 Name
+hgetall stu_1
+hincrby stu_1 age 2
+hmget stu_1 Name
+hmget stu_1 name age
+hkeys stu_4
+hvals stu_4
+
+===================================Lists======================
+lpush num 1 2 3 4
+lrange num 0 10
+lpush num 5
+lrange num 0 -1
+lpop num 
+rpush num 5
+lrange num 0 -1
+rpop num 
+llen num
+lrange num 0 -1
+lindex num 3
+lset num 0 5
+lrange num 0 -1
+lpush num 6 7 8
+lrange num 0 -1
+lpushx num 9
+lrange num 0 -1
+linsert num before 2 55
+linsert num after 5 4 
+
+============================Sets=====================
+sadd myset1 2 3 4
+smembers myset1 
+sadd myset1 3 
+smembers myset1
+scard myset1
+sadd myset2 5 8 7 6 4 9 
+smembers myset2 
+sdiff myset1 myset2
+sdiffstore myser3 myset1 myset2
+smembers myset3
+sunion myset1 myset2
+sunionstore myset4 myset1 myset2
+smembers myset4
+srem myset4 9 
+sinter myset1 myset2
+sinterstore myset5 myset1 myset2
+smembers myset5
+
+======================Sorted List in Redis=============
+zadd mysortedset 1 a 2 b 3 c 5 f
+zrange mysortedset 0 -1
+zadd mysortedset 100 e
+zrange mysortedset 0 -1
+zcard mysortedset
+zcount mysortedset 1 3
+zcount mysortedset 1 5
+zcount mysortedset 1 101
+zcount mysortedset 1 99
+zrem mysortedset b
+zrange mysortedset 0 -1
+
+zrank mysortedset  d
+zrevrank mysortedset  e
+zscore mysortedset  a
+zscore mysortedset  adasdasad
+zrange mysortedset  0 -1
+zadd mysortedset 1 aaaaa
+zscore mysortedset  a
+zrangebyscore mysortedset  1 2 
+
+
+============================Sorting ============
+
+sadd myset 1 2 3 foo foobar feelsgood
+sscan myset 0 match f* 
+
+=======================Redis Sorting ==================
+
+SORT  mysortedset alpha desc
+SORT mysortedset  alpha
+
+
+==================Aggregation ===================
+ZADD zset1 1 "one"
+ZADD zset1 2 "two"
+ZADD zset2 1 "one"
+ZADD zset1 2 "two"
+ZADD zset1 3 "three"
+
+ZUNIONSTORE out 2 zset1 zset2 WEIGHTS 2 3
+ZRANGE out 0 -1 WITHSCORES
+
+
+
+
+
+
+
+
+
+
